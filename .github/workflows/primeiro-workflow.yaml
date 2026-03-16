@@ -11,5 +11,44 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Mensagem de teste
-        run: echo "Hello DevOps! Pipeline funcionando."
+      - name: Build Aplicação
+        run: echo "Buildando a Aplicação"
+
+  dev:
+  runs-on: ubuntu-latest
+  needs: build
+
+  steps:
+    -name: Fase de Desenvolvimento
+     run: echo "Deploy no ambiente de desenvolvimento"
+
+
+  qa:
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      -name: Fase de Testes e Qualidade
+       run: echo "Executar os testes de Qualidade"
+
+  homologacao:
+    needs:
+      -dev
+      -qa
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: Deploy Homol
+       run: echo"Executando deploy no ambiente de Homolocao"
+
+  producao:
+    needs: homologacao
+    runs-on: ubuntu-latest
+
+    steps:
+      -name: Deploy producao
+       run: echo "Executando deploy em PRD"
+
+
+
+
