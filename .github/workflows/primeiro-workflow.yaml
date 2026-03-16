@@ -1,18 +1,15 @@
-name: Devops Workflow
+name: Primeiro Workflow
 
 on:
   push:
-    branches:
-      -main
+    branches: [ main ]
 
 jobs:
-  build:
+  teste:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout de Codigo
-        uses: action/checkout@v4
+      - name: Checkout do código
+        uses: actions/checkout@v4
 
-      - name: Mostrar Mensagem
-        run: echo "Olá, Mundo Devops"
-
+      - name: Mensagem de teste
+        run: echo "Hello DevOps! Pipeline funcionando."
